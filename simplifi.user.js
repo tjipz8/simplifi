@@ -55,12 +55,12 @@
         if(window.location.href.includes('settings/accounts')) {
             document.querySelector("h2").textContent = `Accounts (${document.querySelectorAll("li[class*=MuiListItem-root]").length})`
         }
-        let newtotalAmount = document.querySelector("#totals [data-testid*='amount'], #totals [data-testid*='Amount'], span[sharedcomponentid='AmountField']")?.textContent;
+        let newtotalAmount = document.querySelector("#totals [data-testid*='amount']")?.textContent;
         if(window.location.href.includes('/investing') && newtotalAmount && newtotalAmount != totalAmount ) {
 
             totalAmount = newtotalAmount;
 
-            var isAllAccounts = (document.querySelector("#account-select-dropdown") || document.querySelector("#totals button, #totals [role='button']"))?.innerText?.trim() == "All accounts";
+            var isAllAccounts = document.querySelector("#totals button, #totals [role='button']")?.innerText?.trim() == "All accounts";
 
             if(window.location.href.includes('selectedTab=balances')) {}
             else {
