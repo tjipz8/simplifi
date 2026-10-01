@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Simplifi
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  Custom enhancements for Quicken Simplifi (Account sorting & Investment pie chart visualization)
 // @author       tjipz8
 // @match        https://simplifi.quicken.com/*
@@ -55,19 +55,19 @@
         if(window.location.href.includes('settings/accounts')) {
             document.querySelector("h2").textContent = `Accounts (${document.querySelectorAll("li[class*=MuiListItem-root]").length})`
         }
-        let newtotalAmount = document.querySelector("span[sharedcomponentid='AmountField']")?.textContent;
+        let newtotalAmount = document.querySelector("#totals [data-testid*='amount'], #totals [data-testid*='Amount'], span[sharedcomponentid='AmountField']")?.textContent;
         if(window.location.href.includes('/investing') && newtotalAmount && newtotalAmount != totalAmount ) {
 
             totalAmount = newtotalAmount;
 
-            var isAllAccounts = document.querySelector("#account-select-dropdown").innerText == "All accounts";
+            var isAllAccounts = (document.querySelector("#account-select-dropdown") || document.querySelector("#totals button, #totals [role='button']"))?.innerText?.trim() == "All accounts";
 
             if(window.location.href.includes('selectedTab=balances')) {}
             else {
                 let valBtn = document.querySelectorAll("button[field=value]")[0];
-                let valBtnSort = valBtn.querySelectorAll('svg[data-testid=ArrowDownwardIcon]');
-                if(valBtnSort.length == 0) {
-                    document.querySelectorAll("button[field=value]")[0].click();
+                let valBtnSort = valBtn?.querySelectorAll('svg[data-testid=ArrowDownwardIcon]');
+                if(valBtnSort && valBtnSort.length == 0) {
+                    valBtn.click();
                 }
             }
 
