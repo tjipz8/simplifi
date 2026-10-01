@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Simplifi
 // @namespace    http://tampermonkey.net/
-// @version      0.2
+// @version      0.3
 // @description  Custom enhancements for Quicken Simplifi (Account sorting & Investment pie chart visualization)
 // @author       tjipz8
 // @match        https://simplifi.quicken.com/*
